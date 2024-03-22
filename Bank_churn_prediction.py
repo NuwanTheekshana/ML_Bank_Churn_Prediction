@@ -2,7 +2,7 @@ import streamlit as st
 import pickle
 import requests
 
-url = 'https://github.com/NuwanTheekshana/ML_Bank_Churn_Prediction/raw/main/BC_model.pkl'
+url = 'BC_model.pkl'
 response = requests.get(url)
 with open('BC_model.pkl', 'wb') as f:
     f.write(response.content)
@@ -31,7 +31,6 @@ EstimatedSalary = st.number_input('Estimated Salary:')
 
 
 if st.button('Predict'):
-    # Map input values to numerical representation
     geography_mapping = {'France': 0, 'Germany': 1, 'Spain': 2}
     gender_mapping = {'Female': 0, 'Male': 1}
     has_cr_card_mapping = {'No': 0, 'Yes': 1}
@@ -44,7 +43,6 @@ if st.button('Predict'):
     
     pred = predict_churn(CreditScore, Geography, Gender, Age, Tenure, Balance, NumOfProducts, HasCrCard, IsActiveMember, EstimatedSalary)
     
-    # Display prediction result
     if pred == 0:
         st.write("Exited")
     else:
