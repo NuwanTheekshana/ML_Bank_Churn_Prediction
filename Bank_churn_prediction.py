@@ -1,6 +1,13 @@
 import pickle
+import requests
 
-model = pickle.load(open('https://github.com/NuwanTheekshana/ML_Bank_Churn_Prediction/blob/main/BC_model.pkl', 'rb'))
+
+url = 'https://github.com/NuwanTheekshana/ML_Bank_Churn_Prediction/raw/main/BC_model.pkl'
+response = requests.get(url)
+with open('BC_model.pkl', 'wb') as f:
+    	f.write(response.content)
+
+model = pickle.load(open('BC_model.pkl', 'rb'))
 
 CreditScore = int(input('Please enter CreditScore: '))
 Geography = int(input('Please enter Geography (0-France, 1-Germany, 2-Spain): '))
